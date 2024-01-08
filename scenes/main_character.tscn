@@ -188,7 +188,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1t56h"]
-size = Vector2(85, 98)
+size = Vector2(85, 92)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_kh6y3")
@@ -198,10 +198,10 @@ texture_filter = 1
 position = Vector2(75, 480)
 scale = Vector2(3.40625, 3.40625)
 sprite_frames = SubResource("SpriteFrames_edv6t")
-animation = &"idle"
+animation = &"running"
 autoplay = "idle"
-frame_progress = 0.428974
+frame_progress = 0.734119
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(75.5, 487)
+position = Vector2(75.5, 484)
 shape = SubResource("RectangleShape2D_1t56h")
