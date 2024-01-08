@@ -15,7 +15,7 @@ public partial class main_character : CharacterBody2D
 		sprite2d = GetNode<AnimatedSprite2D>("Sprite2D");
 	}
  
-
+	private int jumpCount = 2;
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
@@ -23,7 +23,6 @@ public partial class main_character : CharacterBody2D
 
 		if (Math.Abs(velocity.X) > 1)
 		{
-			GD.Print("Running");
 			sprite2d.Animation = "running";
 		}
 		else
@@ -36,23 +35,40 @@ public partial class main_character : CharacterBody2D
 			velocity.Y += gravity * (float)delta;
 			sprite2d.Animation = "jumping";
 		}
-		// int jumpCount = 0;
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-			// jumpCount += 1;
-			velocity.Y = JumpVelocity;
-		// else if (Input.IsActionJustPressed("ui_accept") && jumpCount < 2)
-		// 	velocity.Y = JumpVelocity;
+
+		if (Input.IsActionJustPressed("jump"))
+		{
+			GD.Print(jumpCount);
+			jumpCount -= 1;
+			
+			if (jumpCount > 0)
+			{
+				velocity.Y = JumpVelocity;
+			}
+		}
+		//if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		//{
+			//velocity.Y = JumpVelocity;
+			//jumpCount -= 1;
+			//GD.Print(jumpCount);
+		//}
+
+		if (IsOnFloor())
+		{
+			jumpCount = 2;
+		}
+		
+		
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		if (direction != Vector2.Zero)
+		float direction = Input.GetAxis("left", "right");
+		if (direction != 0)
 		{
-			velocity.X = direction.X * Speed;
+			velocity.X = direction * Speed;
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, 12);
 		}
 
 		Velocity = velocity;
