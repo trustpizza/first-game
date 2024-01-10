@@ -38,7 +38,6 @@ public partial class main_character : CharacterBody2D
 
 		if (Input.IsActionJustPressed("jump"))
 		{
-			GD.Print(jumpCount);
 			jumpCount -= 1;
 			
 			if (jumpCount > 0)
@@ -46,12 +45,6 @@ public partial class main_character : CharacterBody2D
 				velocity.Y = JumpVelocity;
 			}
 		}
-		//if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		//{
-			//velocity.Y = JumpVelocity;
-			//jumpCount -= 1;
-			//GD.Print(jumpCount);
-		//}
 
 		if (IsOnFloor())
 		{
